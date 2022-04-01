@@ -7,6 +7,27 @@ export class PokemonService{
 constructor(){
 
 }
+
+
+getPokemonRandom(){
+    return new Promise((resolve, reject) =>{
+        axios.get("https://pokeapi.co/api/v2/pokemon/").then(response =>{
+            //on stock les données json du pokemon dans la variable pokemondata
+            let poke = response.Math.floor(Math.random() * 100)
+            console.log(poke)
+            poke.id = poke
+        
+            
+            
+        })
+        .catch(reason =>{
+            reject("erreur lors de la recup des pokemons" + reason)
+        })
+    })
+}
+
+
+
 //permet de stocker toute les info de lapi sur un pokemon precis
 getPokemon(id){
     return new Promise((resolve, reject) =>{
@@ -31,6 +52,7 @@ getPokemon(id){
             pokemon.abilities= pokemondata.abilities
             pokemon.types= pokemondata.types
             pokemon.sound = "https://www.pokebip.com/audio/cris-sl/"+id+".mp3"
+            pokemon.image = pokemondata.id
            
             //jappelle resolve pour resoudre ma promesse ce qui va declencher le .then
             resolve(pokemon)
@@ -66,10 +88,11 @@ getPokemons(){
         .catch(reason =>{
             reject("erreur lors de la recup des pokemons" + reason)
         })
-        
+        let id = Math.floor(Math.random() * 100)
+    console.log(id)
     })
 
-
+    
 
 }
 
